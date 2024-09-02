@@ -1,0 +1,335 @@
+ mongosh
+Current Mongosh Log ID: 66d17d36b31ec0505a2710bb
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-08-30T09:28:48.525+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use chitkara
+switched to db chitkara
+chitkara> db.student.find({
+...     $or: [
+...         { marks: { $gte: 90 } },
+...         { age: { $lt: 18 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     grade: { $not: { $eq: "A++" } }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c2'),
+    name: 'Grace',
+    age: 23,
+    subject: 'Data Science',
+    marks: 89,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c5'),
+    name: 'Jack',
+    age: 24,
+    subject: 'Data Science',
+    marks: 87,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     $and: [
+...         { age: { $gt: 20 } },
+...         { marks: { $gte: 90 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     $nor: [
+...         { marks: { $gt: 85 } },
+...         { age: { $gt: 21 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     $nor: [
+...         { marks: { $gt: 85 } },
+...         { age: { $gt: 21 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     grade: { $exists: true }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     age: { $exists: false }
+... })
+
+chitkara> db.student.find({
+...     marks: { $type: "int" }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c2'),
+    name: 'Grace',
+    age: 23,
+    subject: 'Data Science',
+    marks: 89,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c5'),
+    name: 'Jack',
+    age: 24,
+    subject: 'Data Science',
+    marks: 87,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     grade: { $exists: true }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     marks: { $type: "int", $gt: 90 }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.updateOne(
+...     { name: "Hannah" },
+...     { $set: { grade: "A" } } 
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+chitkara> db.student.updateMany(
+...     {},
+...     { $set: { subject: "Maths" } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+chitkara> db.student.findOneAndUpdate(
+...     { name: "Frank" },
+...     { $set: { name: "Frank Frank" } }
+...     
+... )
+{
+  _id: ObjectId('66ceefef6439b6df322710c1'),
+  name: 'Frank',
+  age: 21,
+  subject: 'Maths',
+  marks: 90,
+  address: 'Chitkara University'
+}
+chitkara> db.student.replaceOne(
+...     { name: "Frank Frank" },
+...     { name: "Frank" }            
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+chitkara> db.recipes.insertMany([
+...   {
+...     "name": "Spaghetti Carbonara",
+...     "cuisine": "Italian",
+...     "type": "non-veg",
+...     "ingredients": ["spaghetti", "eggs", "parmesan cheese", "bacon"],
+...     "prepTime": 20
+...   },
+...   {
+...     "name": "Vegetable Curry",
+...     "cuisine": "Indian",
+...     "type": "veg",
+...     "ingredients": ["potatoes", "carrots", "peas", "curry powder"],
+...     "prepTime": 30
+...   },
+...   {
+...     "name": "Chicken Caesar Salad",
+...     "cuisine": "American",
+...     "type": "non-veg",
+...     "ingredients": ["chicken breast", "romaine lettuce", "croutons", "Caesar dressing"],
+...     "prepTime": 15
+...   },
+...   {
+...     "name": "Sushi Rolls",
+...     "cuisine": "Japanese",
+...     "type": "non-veg",
+...     "ingredients": ["sushi rice", "seaweed", "fish", "vegetables"],
+...     "prepTime": 45
+...   },
+...   {
+...     "name": "Quinoa Salad",
+...     "cuisine": "Mediterranean",
+...     "type": "veg",
+...     "ingredients": ["quinoa", "cucumber", "tomatoes", "feta cheese"],
+...     "prepTime": 25
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66d1936eb31ec0505a2710bc'),
+    '1': ObjectId('66d1936eb31ec0505a2710bd'),
+    '2': ObjectId('66d1936eb31ec0505a2710be'),
+    '3': ObjectId('66d1936eb31ec0505a2710bf'),
+    '4': ObjectId('66d1936eb31ec0505a2710c0')
+  }
+}
+chitkara> db.recipes.deleteOne({ name: "Chicken Caesar Salad" });
+{ acknowledged: true, deletedCount: 1 }
+chitkara> db.recipes.deleteMany({ type: "non-veg" });
+{ acknowledged: true, deletedCount: 2 }
+chitkara> db.recipes.findOneAndDelete(
+...   { name: "Vegetable Curry" }
+... );
+{
+  _id: ObjectId('66d1936eb31ec0505a2710bd'),
+  name: 'Vegetable Curry',
+  cuisine: 'Indian',
+  type: 'veg',
+  ingredients: [ 'potatoes', 'carrots', 'peas', 'curry powder' ],
+  prepTime: 30
+}
+chitkara>
